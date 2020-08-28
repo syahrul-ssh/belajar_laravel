@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use Faker\Factory as Faker;
+
 class PegawaiSeeder extends Seeder
 {
     /**
@@ -12,11 +14,15 @@ class PegawaiSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('pegawai')->insert([
-            'pegawai_nama' => 'Maul',
-            'pegawai_jabatan' => 'Web Develover',
-            'pegawai_umur' => 23,
-            'pegawai_alamat' => 'Jakarta'
-        ]);
+        $faker = Faker::create('id_ID');
+
+        for ($i = 1; $i <= 50; $i++) {
+            DB::table('pegawai')->insert([
+                'pegawai_nama' => $faker->name,
+                'pegawai_jabatan' => $faker->jobTitle,
+                'pegawai_umur' => $faker->numberBetween(20, 30),
+                'pegawai_alamat' => $faker->address
+            ]);
+        }
     }
 }
